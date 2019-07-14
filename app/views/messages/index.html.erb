@@ -1,0 +1,22 @@
+  <div class="contents row" >
+   <% @messages.each do |message| %>
+      <div class="content_post" style="background-image: url(<%= message.image %>);">
+      <% if user_signed_in? && current_user.id == message.user_id %>
+      <div class="more">
+         
+          <ul class="more_list">
+           
+            <li>
+              <%= link_to '編集', "/messages/#{message.id}/edit", method: :get %>
+            </li>
+             <li>
+       <%= link_to '削除', "/messages/#{message.id}", method: :delete %>
+               </li>
+          </ul>
+        </div>
+       <% end %>
+        <%= simple_format(message.text) %>
+        <span class="name"><%= message.name %></span>
+      </div>
+    <% end %>
+  </div>
